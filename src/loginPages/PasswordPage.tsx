@@ -17,7 +17,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {RouteState} from '../Mytypes';
 import login_styles from './LoginStyles';
 import Logo from './Logo';
-import SavingUserToSite from './SavingUserToSite';
+import SavingUserInfo from './SavingUserInfo';
 
 interface Props {
   resend?: any;
@@ -79,7 +79,7 @@ const PasswordPage: React.FC<Props> = ({resend, response, loginInput}) => {
       .then((data) => {
         if (data) {
           setLoading(false);
-          console.log(SavingUserToSite(user, password), 'save result');
+          SavingUserInfo(user, password);
           response(RouteState.logged);
         }
       })
