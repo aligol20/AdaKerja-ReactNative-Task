@@ -1,3 +1,6 @@
+/**
+ * List of commits can be found here
+ */
 import React, {useEffect, useState} from 'react';
 import {
   View,
