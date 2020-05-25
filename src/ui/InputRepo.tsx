@@ -1,26 +1,23 @@
 /**
  * User input it's favorite repo to  find
  */
+import {useFocusEffect} from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 import React, {useState} from 'react';
 import {
-  View,
-  TextInput,
-  TouchableHighlight,
-  Text,
+  Dimensions,
   FlatList,
   KeyboardAvoidingView,
-  Dimensions,
-  StatusBar,
   Platform,
+  StatusBar,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  View,
 } from 'react-native';
-import * as RootNavigation from '../RootNavigation';
-import AsyncStorage from '@react-native-community/async-storage';
-import RNRestart from 'react-native-restart';
 import LinearGradient from 'react-native-linear-gradient';
-import login_styles from '../loginPages/LoginStyles';
+import * as RootNavigation from '../RootNavigation';
 import {input_repo} from './Styles';
-import LottieView from 'lottie-react-native';
-import {useFocusEffect} from '@react-navigation/native';
 
 const width = Dimensions.get('screen').width;
 const InputRepo: React.FC = () => {
@@ -79,6 +76,8 @@ const InputRepo: React.FC = () => {
                 alignItems: 'center',
                 marginTop: 13,
                 marginBottom: 13,
+                height: '100%',
+                paddingLeft: 5,
               }}
               returnKeyType={'search'}
               placeholder={'Repository name'}
