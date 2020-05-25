@@ -1,6 +1,5 @@
 /**
- * This page shows OverView of hospital orders here.
- * includes payments,pending for accept & ....
+ * This page manages pages for routeing.
  */
 
 import {createStackNavigator} from '@react-navigation/stack';
@@ -14,16 +13,11 @@ import RNRestart from 'react-native-restart';
 
 const Stack = createStackNavigator();
 /**
- * HomeChildren contains 4 screens:
- * 1- OverView: we show orders count,payments count and the others in tile view here.
- * 2- Account: user can access account also from here.
- * 3- Maintenance: is simple page instead of pages are developping or still are not ready
- * 4- Analyctics : graphs appears here.
- * 5- SearchScreen: search in wares,units,employees,...
- * 6- PaymentsMain: orders thet are waiting for payments
- * 7- Requests: all requests can be found here
- * 8- OrderDetails: access orderDetails.tsx from home screen
- * initial page that shows first is : OverView
+ * HomeChildren contains 2 screens:
+ * 1- InputRepo:User inputs his favorite repository and see the result
+ * 2- CommitesList:list of commits for every repo can be found here
+
+ * initial page that shows first is : InputRepo
  */
 export const HomeChildren = () => {
   const LogOut = async () => {
