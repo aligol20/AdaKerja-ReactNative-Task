@@ -4,7 +4,7 @@
 import LottieView from 'lottie-react-native';
 import React, {useEffect} from 'react';
 import {Dimensions, Text, View} from 'react-native';
-import SavingUserToSite from '../loginPages/SavingUserToSite';
+import SavingUserInfo from '../loginPages/SavingUserInfo';
 import AsyncStorage from '@react-native-community/async-storage';
 import {RouteState} from '../Mytypes';
 
