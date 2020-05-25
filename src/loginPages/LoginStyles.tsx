@@ -23,7 +23,7 @@ const login_styles = StyleSheet.create({
     borderRadius: 23,
     color: 'white',
     fontSize: 0.07 * width,
-    textAlign: 'left',
+    textAlign: 'center',
   },
   logo_text: {color: 'white'},
   help_text: {
