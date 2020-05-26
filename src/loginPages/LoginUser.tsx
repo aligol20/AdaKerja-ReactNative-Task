@@ -39,6 +39,7 @@ const LoginUser: React.FC<Props> = ({response}) => {
           <View style={common_styles.package}>
             <TextInput
               style={login_styles.phone_input}
+              clearButtonMode={'while-editing'}
               placeholder={'username'}
               placeholderTextColor={'rgba(255,255,255,0.4)'}
               onSubmitEditing={() =>
