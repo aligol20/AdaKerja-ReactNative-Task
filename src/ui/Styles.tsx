@@ -116,6 +116,7 @@ export const input_repo = StyleSheet.create({
     alignItems: 'center',
     marginTop: 13,
     marginBottom: 13,
+    height: '7%',
   },
   text_input: {
     width: '80%',
@@ -132,7 +133,9 @@ export const input_repo = StyleSheet.create({
     borderRadius: 13,
     margin: 3,
     alignItems: 'center',
+    justifyContent: 'center',
     width: '18%',
+    height: '100%',
   },
   button_enable: {
     backgroundColor: '#20B87B',
@@ -140,6 +143,9 @@ export const input_repo = StyleSheet.create({
     margin: 3,
     alignItems: 'center',
     width: '18%',
+    justifyContent: 'center',
+
+    height: '100%',
   },
   button_text: {color: 'white', margin: 13, fontWeight: 'bold'},
   lottie_view: {
