@@ -19,10 +19,10 @@ In This project I tried to build a react-native project that has these features:
  - login screen is available when you are not signed in and you are not allowed to access it with back button
  
 ### Gifs
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+<img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/android-app.gif" width="300">  |  <img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/ios-app.gif" width="300">
 
-
-<img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/android-app.gif" width="300">
-<img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/ios-app.gif" width="300">
 
 
 
