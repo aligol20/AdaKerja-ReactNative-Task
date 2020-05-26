@@ -26,7 +26,7 @@ Android             |  iOS
 
 #### 1. Install dependencies
 - `git clone https://github.com/aligol20/AdaKerja-ReactNative-Task.git`
-- `cd react-native-example`
+- `cd AdaKerja-RactNative-Task`
 - `npm install`
 
 
