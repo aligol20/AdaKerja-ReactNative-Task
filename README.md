@@ -21,7 +21,7 @@ In This project I tried to build a react-native project that has these features:
 ### Gifs
 
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Yaktocat](https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/Screen%20Shot%202020-05-26%20at%202.05.21%20PM.png)
  
 
 
