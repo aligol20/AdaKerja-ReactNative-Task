@@ -3,7 +3,7 @@
  */
 import {useFocusEffect} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Dimensions,
   FlatList,
@@ -22,19 +22,42 @@ import {input_repo} from './Styles';
 const width = Dimensions.get('screen').width;
 const InputRepo: React.FC = () => {
   const [repo, setRepo] = useState<string>();
-  const [searchResult, setSearchResult] = useState();
+  const [searchResult, setSearchResult] = useState<any>();
   const octokit = require('@octokit/rest')();
   const [loading, setLoading] = useState<boolean>(false);
+  const [pagination, setPagination] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
 
-  /**
-   * more Details @ref - PaymentsOverView.tsx
-   */
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBarStyle('light-content');
       Platform.OS === 'android' && StatusBar.setBackgroundColor('#4F68C4');
-    }, []),
+    }, [page]),
   );
+
+  useEffect(() => {
+    if (repo) {
+      setPagination(true);
+
+      octokit.search
+        .repos({
+          q: repo,
+          in: 'name',
+          page: page,
+        })
+        .then(({data, headers, status}: any) => {
+          // handle data
+          if (searchResult) {
+            let combinedArray = [...searchResult, ...data.items];
+            setSearchResult(combinedArray);
+            setPagination(false);
+          } else {
+            setSearchResult(data.items);
+            setPagination(false);
+          }
+        });
+    }
+  }, [page]);
 
   const findRepo = () => {
     setLoading(true);
@@ -42,11 +65,17 @@ const InputRepo: React.FC = () => {
       .repos({
         q: repo,
         in: 'name',
+        page: page,
       })
       .then(({data, headers, status}: any) => {
-        console.log(data, 'data data');
         // handle data
-        setSearchResult(data.items);
+        if (searchResult) {
+          let combinedArray = [...searchResult, ...data.items];
+          setSearchResult(combinedArray);
+        } else {
+          setSearchResult(data.items);
+        }
+
         setLoading(false);
       });
   };
@@ -58,27 +87,10 @@ const InputRepo: React.FC = () => {
         end={{x: 0, y: 1}}
         colors={['#4F68C4', '#0C2682']}
         style={{flex: 1}}>
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <View
-            style={{
-              width: '95%',
-              borderRadius: 13,
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: 13,
-              marginBottom: 13,
-            }}>
+        <View style={input_repo.text_input_container}>
+          <View style={input_repo.input_view}>
             <TextInput
-              style={{
-                width: '80%',
-                backgroundColor: 'white',
-                borderRadius: 13,
-                alignItems: 'center',
-                marginTop: 13,
-                marginBottom: 13,
-                height: '100%',
-                paddingLeft: 5,
-              }}
+              style={input_repo.text_input}
               returnKeyType={'search'}
               placeholder={'Repository name'}
               placeholderTextColor={'#999999'}
@@ -90,38 +102,19 @@ const InputRepo: React.FC = () => {
               underlayColor={'transparent'}
               style={
                 repo?.length === 0
-                  ? {
-                      backgroundColor: '#999999',
-                      borderRadius: 13,
-                      margin: 3,
-                      alignItems: 'center',
-                      width: '18%',
-                    }
-                  : {
-                      backgroundColor: '#20B87B',
-                      borderRadius: 13,
-                      margin: 3,
-                      alignItems: 'center',
-                      width: '18%',
-                    }
+                  ? input_repo.button_disable
+                  : input_repo.button_enable
               }
               onPress={() => {
                 if (repo?.length !== 0) {
                   findRepo();
                 }
               }}>
-              <Text style={{color: 'white', margin: 13, fontWeight: 'bold'}}>
-                {'Find'}
-              </Text>
+              <Text style={input_repo.button_text}>{'Find'}</Text>
             </TouchableHighlight>
           </View>
           {loading ? (
-            <View
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                flex: 1,
-              }}>
+            <View style={input_repo.lottie_view}>
               <LottieView
                 style={{
                   marginTop: 3,
@@ -137,10 +130,12 @@ const InputRepo: React.FC = () => {
             <FlatList
               data={searchResult}
               contentContainerStyle={{paddingBottom: 53}}
-              onEndReached={() => null}
-              keyExtractor={(item) => item.id}
+              onEndReached={() => setPage(page + 1)}
+              onEndReachedThreshold={0.5}
+              keyExtractor={(item, index) => item + index.toString()}
               renderItem={(item) => (
                 <TouchableHighlight
+                  key={item.index}
                   underlayColor={'transparent'}
                   style={{
                     alignItems: 'center',
@@ -152,20 +147,25 @@ const InputRepo: React.FC = () => {
                       repo: item.item.name,
                     })
                   }>
-                  <View
-                    style={{
-                      flexDirection: 'column',
-                      width: '95%',
-                      backgroundColor: 'white',
-                      margin: 3,
-                      borderRadius: 7,
-                    }}>
+                  <View style={input_repo.list_view}>
                     <Text style={{fontSize: 19, color: 'black', margin: 7}}>
                       {item && item.item && item.item.name}
                     </Text>
                   </View>
                 </TouchableHighlight>
               )}
+            />
+          )}
+          {pagination && (
+            <LottieView
+              style={{
+                marginTop: 3,
+                width: 0.15 * width,
+                height: 0.15 * width,
+              }}
+              source={require('../lottie/loading__.json')}
+              autoPlay
+              loop={true}
             />
           )}
         </View>
