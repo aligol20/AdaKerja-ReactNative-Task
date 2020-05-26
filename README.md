@@ -28,6 +28,7 @@ Android             |  iOS
 - `git clone https://github.com/aligol20/AdaKerja-ReactNative-Task.git`
 - `cd AdaKerja-RactNative-Task`
 - `npm install`
+- `npm start`
 
 
 #### 2. Running The App:
