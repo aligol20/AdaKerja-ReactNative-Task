@@ -122,7 +122,7 @@ const CommitsList = () => {
           onEndReached={(value) => setPage(page + 1)}
           renderItem={(item: any) => (
             <ListItem
-              key={item.index}
+              key={item + (item.index * 321).toString()}
               message={item.item.commit.message}
               name={item.item.commit.author.name}
               email={item.item.commit.author.email}
