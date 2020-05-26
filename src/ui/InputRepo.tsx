@@ -90,6 +90,7 @@ const InputRepo: React.FC = () => {
         <View style={input_repo.text_input_container}>
           <View style={input_repo.input_view}>
             <TextInput
+              clearButtonMode={'while-editing'}
               style={input_repo.text_input}
               returnKeyType={'search'}
               placeholder={'Repository name'}
