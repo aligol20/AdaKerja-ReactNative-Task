@@ -156,6 +156,9 @@ const InputRepo: React.FC = () => {
                     <Text style={{fontSize: 19, color: 'black', margin: 7}}>
                       {item && item.item && item.item.name}
                     </Text>
+                    <Text style={{fontSize: 13, color: '#999999', margin: 7}}>
+                      {item && item.item && item.item.owner.login}
+                    </Text>
                   </View>
                 </TouchableHighlight>
               )}
