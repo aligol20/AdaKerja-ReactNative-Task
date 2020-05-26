@@ -35,7 +35,7 @@ Android             |  iOS
  - `cd ios`
  - `pod install`
  - `cd ..`
- Run `npx react-native run-ios` in the project root. It will perform some compilation and then launch the app in the iOS simulator.
+ - Run `npx react-native run-ios` in the project root. It will perform some compilation and then launch the app in the iOS simulator.
  ##### Android:
  Open Android Studio, launch the AVD Manager, and start an virtual device. Then `run react-native run-android`. 
 
