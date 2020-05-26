@@ -110,6 +110,8 @@ const PasswordPage: React.FC<Props> = ({resend, response, loginInput}) => {
               placeholderTextColor={'rgba(255,255,255,0.4)'}
               onChangeText={(code) => setPassword(code)}
               onSubmitEditing={loginResponse}
+              clearButtonMode={'while-editing'}
+              secureTextEntry={true}
             />
 
             {loading ? (
