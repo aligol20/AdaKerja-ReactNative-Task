@@ -23,6 +23,7 @@ const width = Dimensions.get('screen').width;
 const InputRepo: React.FC = () => {
   const [repo, setRepo] = useState<string>();
   const [searchResult, setSearchResult] = useState<any>();
+  const [foundResult, setFoundResult] = useState<number>(0);
   const octokit = require('@octokit/rest')();
   const [loading, setLoading] = useState<boolean>(false);
   const [pagination, setPagination] = useState<boolean>(false);
@@ -68,7 +69,9 @@ const InputRepo: React.FC = () => {
         page: page,
       })
       .then(({data, headers, status}: any) => {
+        console.log(data, 'data data');
         // handle data
+        setFoundResult(data.total_count);
         if (searchResult) {
           let combinedArray = [...searchResult, ...data.items];
           setSearchResult(combinedArray);
@@ -114,6 +117,7 @@ const InputRepo: React.FC = () => {
               <Text style={input_repo.button_text}>{'Find'}</Text>
             </TouchableHighlight>
           </View>
+          <Text style={{color: 'white'}}>{'found result:' + foundResult}</Text>
           {loading ? (
             <View style={input_repo.lottie_view}>
               <LottieView
