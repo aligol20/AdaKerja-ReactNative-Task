@@ -7,7 +7,7 @@ Currently available for Android and iOS
 ### Features
 
 1. Login Screen for enter the username
-2. password screen for enter the githhub password
+2. password screen for enter the github password
 3. Input screen for typing the repository name
 4. Commits screen for see the commits of every repository includes:
  - commiter avatar
