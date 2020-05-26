@@ -51,7 +51,7 @@ const UserImage: React.FC<Props> = ({uri, name, email}) => {
                 Linking.openURL('mailto:' + email);
               }}
               style={{
-                backgroundColor: '#5B2684',
+                backgroundColor: '#4F68C4',
                 borderRadius: 7,
                 width: '70%',
                 margin: 23,
