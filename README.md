@@ -38,7 +38,7 @@ Android             |  iOS
  - `cd ..`
  - Run `npx react-native run-ios` in the project root. It will perform some compilation and then launch the app in the iOS simulator.
  ##### Android:
- Open Android Studio, launch the AVD Manager, and start an virtual device. Then `run react-native run-android`. 
+ Open Android Studio, launch the AVD Manager, and start an virtual device. Then `npx react-native run-android`. 
 
 ### Dependencies:
 * [React Navigation](http://reactnavigation.org)
