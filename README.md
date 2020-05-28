@@ -20,7 +20,7 @@ Currently available for Android and iOS
 ### Gifs
 Android             |  iOS
 :-------------------------:|:-------------------------:
-<img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/android-app.gif" width="300">  |  <img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/ios-app.gif" width="300">
+<img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/android-app.gif" width="300">  |  <img src="https://github.com/aligol20/AdaKerja-ReactNative-Task/blob/master/ios_app.gif" width="300">
 
 ## Setup instructions
 
