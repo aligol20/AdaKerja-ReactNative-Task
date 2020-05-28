@@ -7,7 +7,7 @@ Currently available for Android and iOS
 ### Features
 
 1. Login Screen for enter the username
-2. password screen for enter the githhub password
+2. password screen for enter the github password
 3. Input screen for typing the repository name
 4. Commits screen for see the commits of every repository includes:
  - commiter avatar
@@ -28,13 +28,17 @@ Android             |  iOS
 - `git clone https://github.com/aligol20/AdaKerja-ReactNative-Task.git`
 - `cd AdaKerja-RactNative-Task`
 - `npm install`
+- `npm start`
 
 
 #### 2. Running The App:
  ##### iOS:
- Run `npx react-native run-ios` in the project root. It will perform some compilation and then launch the app in the iOS simulator.
+ - `cd ios`
+ - `pod install`
+ - `cd ..`
+ - Run `npx react-native run-ios` in the project root. It will perform some compilation and then launch the app in the iOS simulator.
  ##### Android:
- Open Android Studio, launch the AVD Manager, and start an virtual device. Then `run react-native run-android`. 
+ Open Android Studio, launch the AVD Manager, and start an virtual device. Then `npx react-native run-android`. 
 
 ### Dependencies:
 * [React Navigation](http://reactnavigation.org)
