@@ -16,8 +16,8 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import * as RootNavigation from '../RootNavigation';
-import {input_repo} from './Styles';
+import * as RootNavigation from '../functions/RootNavigation';
+import {input_repo} from '../styles/Styles';
 
 const width = Dimensions.get('screen').width;
 const InputRepo: React.FC = () => {
@@ -61,26 +61,35 @@ const InputRepo: React.FC = () => {
   }, [page]);
 
   const findRepo = () => {
-    setLoading(true);
-    octokit.search
-      .repos({
-        q: repo,
-        in: 'name',
-        page: page,
-      })
-      .then(({data, headers, status}: any) => {
-        console.log(data, 'data data');
-        // handle data
-        setFoundResult(data.total_count);
-        if (searchResult) {
-          let combinedArray = [...searchResult, ...data.items];
-          setSearchResult(combinedArray);
-        } else {
-          setSearchResult(data.items);
-        }
+    if (repo?.length !== 0) {
+      setLoading(true);
+      octokit.search
+        .repos({
+          q: repo,
+          in: 'name',
+          page: page,
+        })
+        .then(({data, headers, status}: any) => {
+          console.log(data, 'data data');
+          // handle data
+          setFoundResult(data.total_count);
+          if (searchResult) {
+            let combinedArray = [...searchResult, ...data.items];
+            setSearchResult(combinedArray);
+          } else {
+            setSearchResult(data.items);
+          }
 
-        setLoading(false);
-      });
+          setLoading(false);
+        });
+    }
+  };
+
+  const navigate = (owner: string, repo: string) => {
+    RootNavigation.navigate('CommitesList', {
+      owner: owner,
+      repo: repo,
+    });
   };
 
   return (
@@ -109,23 +118,17 @@ const InputRepo: React.FC = () => {
                   ? input_repo.button_disable
                   : input_repo.button_enable
               }
-              onPress={() => {
-                if (repo?.length !== 0) {
-                  findRepo();
-                }
-              }}>
+              onPress={findRepo}>
               <Text style={input_repo.button_text}>{'Find'}</Text>
             </TouchableHighlight>
           </View>
-          <Text style={{color: 'white'}}>{'found result:' + foundResult}</Text>
+          <Text style={input_repo.found_result}>
+            {'found result:' + foundResult}
+          </Text>
           {loading ? (
             <View style={input_repo.lottie_view}>
               <LottieView
-                style={{
-                  marginTop: 3,
-                  width: 0.15 * width,
-                  height: 0.15 * width,
-                }}
+                style={input_repo.lottie}
                 source={require('../lottie/loading__.json')}
                 autoPlay
                 loop={true}
@@ -147,16 +150,13 @@ const InputRepo: React.FC = () => {
                     width: width,
                   }}
                   onPress={() =>
-                    RootNavigation.navigate('CommitesList', {
-                      owner: item.item.owner.login,
-                      repo: item.item.name,
-                    })
+                    navigate(item.item.owner.login, item.item.name)
                   }>
                   <View style={input_repo.list_view}>
-                    <Text style={{fontSize: 19, color: 'black', margin: 7}}>
+                    <Text style={input_repo.name}>
                       {item && item.item && item.item.name}
                     </Text>
-                    <Text style={{fontSize: 13, color: '#999999', margin: 7}}>
+                    <Text style={input_repo.owner}>
                       {item && item.item && item.item.owner.login}
                     </Text>
                   </View>
@@ -166,11 +166,7 @@ const InputRepo: React.FC = () => {
           )}
           {pagination && (
             <LottieView
-              style={{
-                marginTop: 3,
-                width: 0.15 * width,
-                height: 0.15 * width,
-              }}
+              style={input_repo.lottie}
               source={require('../lottie/loading__.json')}
               autoPlay
               loop={true}

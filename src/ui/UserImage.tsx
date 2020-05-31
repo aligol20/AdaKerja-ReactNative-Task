@@ -10,8 +10,9 @@ import {
   Linking,
   TouchableHighlight,
 } from 'react-native';
-import {image_style} from './Styles';
+import {image_style, user_image} from '../styles/Styles';
 import Modal from 'react-native-modal';
+import LinkToEmailApp from 'src/functions/LinkToEmailApp';
 
 interface Props {
   uri: string;
@@ -32,39 +33,18 @@ const UserImage: React.FC<Props> = ({uri, name, email}) => {
         style={image_style.modal}
         useNativeDriver={true}
         isVisible={emailModal}>
-        <View
-          style={{
-            backgroundColor: 'white',
-            alignItems: 'center',
-            borderRadius: 13,
-            width: '70%',
-            height: '25%',
-          }}>
+        <View style={user_image.container}>
           <Image style={image_style.user_image_large} source={{uri: uri}} />
           <View style={image_style.user_info}>
-            <View style={{flexDirection: 'column'}}>
-              <Text style={{fontSize: 19, color: '#4F68C4'}}>{name}</Text>
+            <View style={user_image.name_container}>
+              <Text style={user_image.name}>{name}</Text>
             </View>
             <TouchableHighlight
               underlayColor={'transparent'}
-              onPress={() => {
-                Linking.openURL('mailto:' + email);
-              }}
-              style={{
-                backgroundColor: '#4F68C4',
-                borderRadius: 7,
-                width: '70%',
-                margin: 23,
-              }}>
-              <View
-                style={{
-                  flexDirection: 'column',
-                  margin: 13,
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'white', fontSize: 23}}>
-                  {'Send Email'}
-                </Text>
+              onPress={() => email && LinkToEmailApp(email)}
+              style={user_image.email_button}>
+              <View style={user_image.button_view}>
+                <Text style={user_image.button_text}>{'Send Email'}</Text>
               </View>
             </TouchableHighlight>
           </View>

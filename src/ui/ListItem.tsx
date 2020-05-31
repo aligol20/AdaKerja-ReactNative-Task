@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import UserImage from './UserImage';
-import {list_item} from './Styles';
+import {list_item} from '../styles/Styles';
 import {ScrollView} from 'react-native-gesture-handler';
 interface Props {
   avatar_url: string;
@@ -28,7 +28,9 @@ const ListItem: React.FC<Props> = ({
   email,
 }) => {
   const [detailsModal, visibleDetailsModal] = useState<boolean>(false);
-
+  const makeModalVisible = () => {
+    visibleDetailsModal(true);
+  };
   return (
     <View style={list_item.container}>
       <View style={list_item.image_container}>
@@ -44,7 +46,7 @@ const ListItem: React.FC<Props> = ({
       <TouchableHighlight
         underlayColor={'transparent'}
         style={list_item.message_button}
-        onPress={() => visibleDetailsModal(true)}>
+        onPress={makeModalVisible}>
         <Text>{message && message.split('\n\n')[0]}</Text>
       </TouchableHighlight>
       <Modal

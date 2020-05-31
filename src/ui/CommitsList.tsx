@@ -14,7 +14,8 @@ import {
   View,
 } from 'react-native';
 import ListItem from './ListItem';
-import {commit_list} from './Styles';
+import {commit_list} from '../styles/Styles';
+import octokit from '../functions/Octokit';
 
 const CommitsList = () => {
   const [page, setPage] = useState<number>(1);
@@ -27,22 +28,6 @@ const CommitsList = () => {
   const route = useRoute<any>();
   const [commits, setCommits] = useState<any[]>([{title: '', data: []}]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [pass, setPass] = useState();
-  const [user, setUser] = useState();
-  const octokit = require('@octokit/rest')({
-    timeout: 0, // 0 means no request timeout
-    headers: {
-      accept: 'application/vnd.github.v3+json',
-      'user-agent': 'octokit/rest.js v1.2.3', // v1.2.3 will be current version
-    },
-
-    // custom GitHub Enterprise URL
-    baseUrl: 'https://api.github.com',
-
-    // Node only: advanced request options can be passed as http(s) agent
-    agent: undefined,
-  });
-  const width = Dimensions.get('screen').width;
 
   useEffect(() => {
     AsyncStorage.getItem('userInfo').then((value) => {
@@ -99,15 +84,9 @@ const CommitsList = () => {
   return (
     <View style={{backgroundColor: '#4F68C4'}}>
       {loading ? (
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            width: '100%',
-          }}>
+        <View style={commit_list.container_lottie}>
           <LottieView
-            style={{marginTop: 3, width: 0.15 * width, height: 0.15 * width}}
+            style={commit_list.lottie}
             source={require('../lottie/loading__.json')}
             autoPlay
             loop={true}

@@ -4,6 +4,7 @@
 import React, {useState} from 'react';
 import Modal from 'react-native-modal';
 import {View, Text} from 'react-native';
+import {commit_details} from '../styles/Styles';
 
 interface Props {
   message: string;
@@ -17,7 +18,7 @@ const CommitDetails: React.FC<Props> = ({message}) => {
       swipeDirection={'down'}
       onSwipeComplete={() => visibleDetailsModal(false)}
       isVisible={detailsModal}>
-      <View style={{width: '70%', height: '70%', backgroundColor: 'white'}}>
+      <View style={commit_details.container}>
         <Text>I am the modal content!</Text>
       </View>
     </Modal>
