@@ -4,12 +4,10 @@
 
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-
-import InputRepo from '../ui/InputRepo';
+import {Text, TouchableHighlight} from 'react-native';
+import LogOutAlert from '../functions/LogOutAlert';
 import CommitesList from '../ui/CommitsList';
-import {TouchableHighlight, Text, Alert} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import RNRestart from 'react-native-restart';
+import InputRepo from '../ui/InputRepo';
 
 const Stack = createStackNavigator();
 /**
@@ -20,21 +18,6 @@ const Stack = createStackNavigator();
  * initial page that shows first is : InputRepo
  */
 export const HomeChildren = () => {
-  const LogOut = async () => {
-    try {
-      await AsyncStorage.removeItem('userInfo');
-    } catch (e) {
-      // remove error
-    }
-
-    console.log('Done.');
-
-    /**
-     * more details about RnRestart available at @link https://github.com/avishayil/react-native-restart#readme
-     */
-    RNRestart.Restart();
-  };
-
   return (
     <Stack.Navigator initialRouteName={'InputRepo'}>
       <Stack.Screen
@@ -55,21 +38,7 @@ export const HomeChildren = () => {
           headerRight: () => (
             <TouchableHighlight
               underlayColor={'transparent'}
-              onPress={() =>
-                Alert.alert(
-                  'LogOut',
-                  'Are you sure?',
-                  [
-                    {
-                      text: 'No',
-                      onPress: () => console.log('Cancel Pressed'),
-                      style: 'cancel',
-                    },
-                    {text: 'Yes', onPress: () => LogOut()},
-                  ],
-                  {cancelable: false},
-                )
-              }>
+              onPress={LogOutAlert}>
               <Text style={{color: 'white', margin: 13}}>{'LogOut'}</Text>
             </TouchableHighlight>
           ),
@@ -79,35 +48,11 @@ export const HomeChildren = () => {
         name="CommitesList"
         component={CommitesList}
         options={{
-          headerStyle: {
-            backgroundColor: '#4F68C4',
-            elevation: 0, // remove shadow on Android
-            shadowOpacity: 0, // remove shadow on iOS
-          },
-
-          headerTitleStyle: {
-            color: 'white',
-          },
-          headerTintColor: 'white',
           title: 'CommitList',
           headerRight: () => (
             <TouchableHighlight
               underlayColor={'transparent'}
-              onPress={() =>
-                Alert.alert(
-                  'LogOut',
-                  'Are you sure?',
-                  [
-                    {
-                      text: 'No',
-                      onPress: () => console.log('Cancel Pressed'),
-                      style: 'cancel',
-                    },
-                    {text: 'Yes', onPress: () => LogOut()},
-                  ],
-                  {cancelable: false},
-                )
-              }>
+              onPress={LogOutAlert}>
               <Text style={{color: 'white', margin: 13}}>{'LogOut'}</Text>
             </TouchableHighlight>
           ),
