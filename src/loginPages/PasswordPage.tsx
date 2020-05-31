@@ -14,10 +14,11 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {RouteState} from '../Mytypes';
-import login_styles from './LoginStyles';
+import {RouteState} from '../types/Mytypes';
+import login_styles, {password_styles} from '../styles/LoginStyles';
 import Logo from './Logo';
-import SavingUserInfo from './SavingUserInfo';
+import SavingUserInfo from '../functions/SavingUserInfo';
+import octokit from '../functions/Octokit';
 
 interface Props {
   resend?: any;
@@ -40,19 +41,6 @@ const PasswordPage: React.FC<Props> = ({resend, response, loginInput}) => {
   useEffect(() => {
     setUser(loginInput.user);
   }, []);
-  const octokit = require('@octokit/rest')({
-    timeout: 0, // 0 means no request timeout
-    headers: {
-      accept: 'application/vnd.github.v3+json',
-      'user-agent': 'octokit/rest.js v1.2.3', // v1.2.3 will be current version
-    },
-
-    // custom GitHub Enterprise URL
-    baseUrl: 'https://api.github.com',
-
-    // Node only: advanced request options can be passed as http(s) agent
-    agent: undefined,
-  });
 
   async function paginate(method: any) {
     console.log('user', loginInput.user);
@@ -92,6 +80,9 @@ const PasswordPage: React.FC<Props> = ({resend, response, loginInput}) => {
         );
       });
   };
+  const signIn = () => {
+    response(RouteState.signIn);
+  };
 
   return (
     <KeyboardAvoidingView style={login_styles.safe_area}>
@@ -115,18 +106,9 @@ const PasswordPage: React.FC<Props> = ({resend, response, loginInput}) => {
             />
 
             {loading ? (
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flex: 1,
-                }}>
+              <View style={password_styles.lottie_container}>
                 <LottieView
-                  style={{
-                    marginTop: 3,
-                    width: 0.15 * width,
-                    height: 0.15 * width,
-                  }}
+                  style={password_styles.lottie}
                   source={require('../lottie/loading__.json')}
                   autoPlay
                   loop={true}
@@ -141,9 +123,7 @@ const PasswordPage: React.FC<Props> = ({resend, response, loginInput}) => {
                 <Text style={login_styles.button_text}>{'Login'}</Text>
               </TouchableHighlight>
             )}
-            <TouchableHighlight
-              underlayColor={'transparent'}
-              onPress={() => response(RouteState.signIn)}>
+            <TouchableHighlight underlayColor={'transparent'} onPress={signIn}>
               <Text style={login_styles.link_text}>{'Edit User name'}</Text>
             </TouchableHighlight>
           </View>
