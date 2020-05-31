@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {image_style, user_image} from '../styles/Styles';
 import Modal from 'react-native-modal';
-import LinkToEmailApp from 'src/functions/LinkToEmailApp';
+import LinkToEmailApp from '../functions/LinkToEmailApp';
 
 interface Props {
   uri: string;

@@ -11,11 +11,11 @@ import React, {useState} from 'react';
 import 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {HomeChildren} from './src/homeRoute/HomeChildren';
-import {navigationRef} from './src/RootNavigation';
+import {navigationRef} from './src/functions/RootNavigation';
 import Loading from './src/loadingScreen/LoadingScreen';
 import LoginUser from './src/loginPages/LoginUser';
 import PasswordPage from './src/loginPages/PasswordPage';
-import {RouteState} from './src/Mytypes';
+import {RouteState} from './src/types/Mytypes';
 
 const App: React.FC = () => {
   console.disableYellowBox = true;
