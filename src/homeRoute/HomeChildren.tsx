@@ -48,6 +48,16 @@ export const HomeChildren = () => {
         name="CommitesList"
         component={CommitesList}
         options={{
+          headerStyle: {
+            backgroundColor: '#4F68C4',
+            elevation: 0, // remove shadow on Android
+            shadowOpacity: 0, // remove shadow on iOS
+          },
+
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerTintColor: 'white',
           title: 'CommitList',
           headerRight: () => (
             <TouchableHighlight
