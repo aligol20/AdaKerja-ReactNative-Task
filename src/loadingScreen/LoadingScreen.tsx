@@ -1,12 +1,11 @@
 /**
  * In this page we check AsyncStorage for userInfo
  */
-import LottieView from 'lottie-react-native';
-import React, {useEffect} from 'react';
-import {Dimensions, Text, View} from 'react-native';
-import SavingUserInfo from '../loginPages/SavingUserInfo';
 import AsyncStorage from '@react-native-community/async-storage';
-import {RouteState} from '../Mytypes';
+import LottieView from 'lottie-react-native';
+import React from 'react';
+import {Dimensions, View} from 'react-native';
+import {RouteState} from '../types/Mytypes';
 
 const width = Dimensions.get('screen').width;
 interface Props {
