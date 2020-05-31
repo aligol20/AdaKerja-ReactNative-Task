@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {View, Image, Text, Dimensions} from 'react-native';
-import login_styles from './LoginStyles';
+import login_styles from '../styles/LoginStyles';
 import LottieView from 'lottie-react-native';
 
 const width = Dimensions.get('screen').width;
@@ -14,7 +14,7 @@ interface Props {
 const Logo: React.FC<Props> = ({type}) => {
   return (
     <LottieView
-      style={{marginTop: 3, width: 0.5 * width, height: 0.5 * width}}
+      style={login_styles.lottie}
       source={
         type === 'user'
           ? require('../lottie/user.json')
